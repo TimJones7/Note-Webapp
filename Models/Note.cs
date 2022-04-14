@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace MyFirstWebApp.Models
 {
     public class Note
@@ -11,12 +12,12 @@ namespace MyFirstWebApp.Models
         public string NoteTitle { get; set;}
         public string NoteBody { get; set; }
 
-      
+        public string User { get; set; }
+
         public Note()
         {
 
         }
 
     }
-
 }

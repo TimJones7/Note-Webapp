@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.NoteTitle)
             </th>
            <th>
-               @Html.DisplayNameFor(model => model.Id)
+               @Html.DisplayNameFor(model => model.User)
            </th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.NoteTitle)
             </td>
             <th>
-                @Html.DisplayFor(modelIten => item.Id)
+                @Html.DisplayFor(modelIten => item.User)
             </th>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

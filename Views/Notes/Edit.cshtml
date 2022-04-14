@@ -13,14 +13,15 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="User" value="@User.Identity.Name"/>
             <div class="form-group">
                 <label asp-for="NoteTitle" class="control-label"></label>
-                <input asp-for="NoteTitle" class="form-control" />
+                <input asp-for="NoteTitle" class="form-control" required />
                 <span asp-validation-for="NoteTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NoteBody" class="control-label"></label>
-                <input asp-for="NoteBody" class="form-control" />
+                <input asp-for="NoteBody" class="form-control" required />
                 <span asp-validation-for="NoteBody" class="text-danger"></span>
             </div>
             <div class="form-group">
