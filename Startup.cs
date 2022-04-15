@@ -39,6 +39,10 @@ namespace MyFirstWebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
+       
+        //This is what is considered "middleware", this is where we can handle routing, authentication and exceptions
+        //This is a very crucial method
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -56,7 +60,7 @@ namespace MyFirstWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
             app.UseAuthentication();
             app.UseAuthorization();
 

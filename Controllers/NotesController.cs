@@ -70,7 +70,7 @@ namespace MyFirstWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NoteTitle,NoteBody")] Note note)
+        public async Task<IActionResult> Create([Bind("Id,NoteTitle,NoteBody,User,Priority,Resolved")] Note note)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace MyFirstWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NoteTitle,NoteBody")] Note note)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NoteTitle,NoteBody,User,Priority,Resolved")] Note note)
         {
             if (id != note.Id)
             {

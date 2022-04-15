@@ -22,7 +22,17 @@
                 <input asp-for="NoteBody" class="form-control" required />
                 <span asp-validation-for="NoteBody" class="text-danger"></span>
             </div>
-            <input type="hidden" value="@User.Identity.Name" asp-for="User"  />
+
+            <div class="form-group">
+                <label asp-for="Priority" class="control-label"></label>
+                <select asp-for="Priority" class="form-control" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
+                    <option>Select Priority Level</option>
+                </select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+
+
+            <input type="hidden" value="@User.Identity.Name" asp-for="User" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
