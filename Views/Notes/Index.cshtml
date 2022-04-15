@@ -9,6 +9,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<h2>Unresolved Notes</h2>
+
 <table class="table">
     <thead>
         <tr>
@@ -31,29 +34,82 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.Where(j => j.Resolved == false))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoteTitle)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelIten => item.User)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelIten => item.Priority)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelIten => item.Resolved)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelIten => item.TimeCreated)
+                </th>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Resolved Notes</h2>
+
+<table class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoteTitle)
-            </td>
             <th>
-                @Html.DisplayFor(modelIten => item.User)
+                @Html.DisplayNameFor(model => model.NoteTitle)
             </th>
             <th>
-                @Html.DisplayFor(modelIten => item.Priority)
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th>
-                @Html.DisplayFor(modelIten => item.Resolved)
+                @Html.DisplayNameFor(model => model.Priority)
             </th>
             <th>
-                @Html.DisplayFor(modelIten => item.TimeCreated)
+                @Html.DisplayNameFor(model => model.Resolved)
             </th>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeCreated)
+            </th>
+            <th></th>
         </tr>
-}
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(j => j.Resolved == true))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoteTitle)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelIten => item.User)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelIten => item.Priority)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelIten => item.Resolved)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelIten => item.TimeCreated)
+                </th>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
