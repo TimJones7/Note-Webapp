@@ -13,10 +13,12 @@ public enum PriorityLevel
     critical = 3
 }
 
+
 namespace MyFirstWebApp.Models
 {
     public class Note
     {
+
         [Key]
         public int Id { get; set; }
         [Required]
@@ -32,6 +34,9 @@ namespace MyFirstWebApp.Models
 
         [EnumDataType(typeof(PriorityLevel))]
         public PriorityLevel Priority { get; set; }
+
+        
+
 
         public Note()
         {

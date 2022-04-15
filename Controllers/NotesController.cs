@@ -70,7 +70,7 @@ namespace MyFirstWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NoteTitle,NoteBody,User,Priority,Resolved")] Note note)
+        public async Task<IActionResult> Create([Bind("Id,NoteTitle,NoteBody,User,Priority,Resolved,Category")] Note note)
         {
             if (ModelState.IsValid)
             {

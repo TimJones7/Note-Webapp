@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Notes Master List</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,6 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Priority)
             </th>
@@ -36,28 +37,29 @@
     <tbody>
         @foreach (var item in Model.Where(j => j.Resolved == false))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NoteTitle)
-                </td>
-                <th>
-                    @Html.DisplayFor(modelIten => item.User)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelIten => item.Priority)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelIten => item.Resolved)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelIten => item.TimeCreated)
-                </th>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoteTitle)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.User)
+            </th>
+            
+            <th>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Resolved)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.TimeCreated)
+            </th>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
@@ -73,6 +75,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Priority)
             </th>
@@ -88,28 +91,29 @@
     <tbody>
         @foreach (var item in Model.Where(j => j.Resolved == true))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NoteTitle)
-                </td>
-                <th>
-                    @Html.DisplayFor(modelIten => item.User)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelIten => item.Priority)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelIten => item.Resolved)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelIten => item.TimeCreated)
-                </th>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoteTitle)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.User)
+            </th>
+            
+            <th>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Resolved)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.TimeCreated)
+            </th>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
