@@ -17,11 +17,14 @@
                 <input asp-for="NoteTitle" class="form-control" required />
                 <span asp-validation-for="NoteTitle" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="NoteBody" class="control-label"></label>
-                <input asp-for="NoteBody" class="form-control" required />
+                <label asp-for="NoteBody" for="exampleTextarea" class="form-label mt-4"></label>
+                <textarea asp-for="NoteBody" class="form-control" id="exampleTextarea" rows="3" required></textarea>
                 <span asp-validation-for="NoteBody" class="text-danger"></span>
             </div>
+
+           
 
             <div class="form-group">
                 <label asp-for="Priority" class="control-label"></label>
@@ -31,7 +34,7 @@
                 <span asp-validation-for="Priority" class="text-danger"></span>
             </div>
 
-         
+
 
             <input type="hidden" value="@User.Identity.Name" asp-for="User" />
             <div class="form-group">
