@@ -4,116 +4,158 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Notes Master List</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
-<h2>Unresolved Notes</h2>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-uppercase">
+                Open Issues
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Notes" asp-action="Create" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create A New Note">
+                <i class="bi bi-plus-lg"></i> &nbsp; Add
+            </a>
+        </div>
+    </div>
 
+</div>
+
+<br />
 <table class="table table-hover">
     <thead>
         <tr class="table-active">
             <th>
                 @Html.DisplayNameFor(model => model.NoteTitle)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.User)
+
             </th>
-            
+            <th>
+                Created By
+            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Priority)
             </th>
-           
+
             <th>
-                @Html.DisplayNameFor(model => model.TimeCreated)
+                Last Edited
             </th>
-            <th></th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Where(j => j.Resolved == false))
         {
         <tr>
-            <td>
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-primary">@Html.DisplayFor(modelItem => item.NoteTitle)</button>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Expand</a>
-                        </div>
-                    </div>
-                </div>
-            </td>
+            <th>
+                <a  asp-action="Details" asp-route-id="@item.Id"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
+            <th/>
             <th>
                 @Html.DisplayFor(modelItem => item.User)
             </th>
-            
+
             <th>
                 @Html.DisplayFor(modelItem => item.Priority)
             </th>
-           
+
             <th>
                 @Html.DisplayFor(modelItem => item.TimeCreated)
             </th>
+            <th>
+                <div class="btn-group" >
+                    <a class="btn btn-outline-info" asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                        <i class="bi bi-pencil-square"></i> &nbsp; Edit 
+                    </a>
+
+                    <a class="btn btn-outline-secondary" asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                        <i class="bi bi-trash3"></i>
+                    </a>
+                <div/>
+            </th>
         </tr>
-        }
+        }  
+
     </tbody>
 </table>
 
-<h2>Resolved Notes</h2>
 
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-uppercase">
+                Closed Issues
+            </h2>
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
+
+</div>
+<br/>
 <table class="table table-hover">
     <thead>
         <tr class="table-active">
             <th>
                 @Html.DisplayNameFor(model => model.NoteTitle)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.User)
+
             </th>
-           
+            <th>
+                Created By
+            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Priority)
             </th>
-           
+
             <th>
-                @Html.DisplayNameFor(model => model.TimeCreated)
+                Last Edited
             </th>
-            <th></th>
+            <th>
+
+            </th>
+
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Where(j => j.Resolved == true))
         {
         <tr>
-            <td>
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-primary">@Html.DisplayFor(modelItem => item.NoteTitle)</button>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Expand</a>
-                        </div>
-                    </div>
-                </div>
-            </td>
+            <th>
+                <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
+            <th />
+
             <th>
                 @Html.DisplayFor(modelItem => item.User)
             </th>
-            
+
             <th>
                 @Html.DisplayFor(modelItem => item.Priority)
             </th>
-          
+
             <th>
                 @Html.DisplayFor(modelItem => item.TimeCreated)
+            </th>
+            <th>
+                <div class="btn-group">
+                    <a class="btn btn-outline-info" asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                        <i class="bi bi-pencil-square"></i> &nbsp; Edit
+                    </a>
+
+                    <a class="btn btn-outline-secondary" asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                        <i class="bi bi-trash3"></i>
+                    </a>
+                <div />
             </th>
         </tr>
         }

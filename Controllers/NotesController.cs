@@ -72,7 +72,11 @@ namespace MyFirstWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NoteTitle,NoteBody,User,Priority,Resolved,Category")] Note note)
         {
-            if (ModelState.IsValid)
+            if(note.NoteTitle == note.NoteBody)
+            {
+                ModelState.AddModelError("NoteTitle", "Issue Subject and Explanation can not be identical");
+            }
+            if (ModelState.IsValid)  
             {
                 _context.Add(note);
                 await _context.SaveChangesAsync();
