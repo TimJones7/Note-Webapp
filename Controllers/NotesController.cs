@@ -80,6 +80,7 @@ namespace MyFirstWebApp.Controllers
             {
                 _context.Add(note);
                 await _context.SaveChangesAsync();
+                TempData["created"] = $"Issue '{note.NoteTitle}' Created";
                 return RedirectToAction(nameof(Index));
             }
             return View(note);
@@ -121,6 +122,7 @@ namespace MyFirstWebApp.Controllers
                 {
                     _context.Update(note);
                     await _context.SaveChangesAsync();
+                    TempData["edited"] = $"Issue '{note.NoteTitle}' has been updated";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -166,6 +168,7 @@ namespace MyFirstWebApp.Controllers
             var note = await _context.Note.FindAsync(id);
             _context.Note.Remove(note);
             await _context.SaveChangesAsync();
+            TempData["deleted"] = $"Issue '{note.NoteTitle}' Deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
 
