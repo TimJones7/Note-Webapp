@@ -1,0 +1,51 @@
+﻿@model MyFirstWebApp.Models.Note
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<button class="open-button" onclick="openForm()">Open Form</button>
+
+<div class="form-popup" id="myForm">
+    <form asp-action="Notes/Create">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="NoteTitle" class="control-label">Subject</label>
+            <input asp-for="NoteTitle" class="form-control" required />
+            <span asp-validation-for="NoteTitle" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NoteBody" class="form-label mt-4">Explain Issue</label>
+            <textarea asp-for="NoteBody" class="form-control" rows="5" required></textarea>
+            <span asp-validation-for="NoteBody" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="form-group">
+            <label asp-for="Priority" class="control-label"></label>
+            <select asp-for="Priority" class="form-control" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
+                <option>Select Priority Level</option>
+            </select>
+            <span asp-validation-for="Priority" class="text-danger"></span>
+        </div>
+
+        <br />
+
+        <input type="hidden" value="@User.Identity.Name" asp-for="User" />
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-outline-info">Back to List</a>
+        </div>
+    </form>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
