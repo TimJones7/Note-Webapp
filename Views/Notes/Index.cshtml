@@ -5,7 +5,7 @@
 }
 
 
-<div class="container p-3">
+<div class="container p-2 mt-5">
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-uppercase">
@@ -13,7 +13,7 @@
             </h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Notes" asp-action="Create" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create A New Note">
+            <a asp-controller="Notes" asp-action="Create" class="btn btn-success shadow-lg" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create A New Note">
                 <i class="bi bi-plus-lg"></i> &nbsp; Add
             </a>
         </div>
@@ -21,142 +21,142 @@
 </div>
 
 <br />
-<table class="table table-hover">
-    <thead>
-        <tr class="table-active">
-            <th>
-                @Html.DisplayNameFor(model => model.NoteTitle)
-            </th>
-
-            <th>
-
-            </th>
-            <th>
-                Created By
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Priority)
-            </th>
-
-            <th>
-                Last Edited
-            </th>
-
-            <th>
-
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Where(j => j.Resolved == false))
-        {
-            <tr>
+<div class="container border shadow-lg pt-2 mt-2">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-secondary">
                 <th>
-                    <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
-                <th />
-                <th>
-                    @Html.DisplayFor(modelItem => item.User)
+                    @Html.DisplayNameFor(model => model.NoteTitle)
                 </th>
 
                 <th>
-                    @Html.DisplayFor(modelItem => item.Priority)
+
+                </th>
+                <th>
+                    Created By
                 </th>
 
                 <th>
-                    @Html.DisplayFor(modelItem => item.TimeCreated)
+                    @Html.DisplayNameFor(model => model.Priority)
                 </th>
-                <th>
-                    <div class="btn-group">
-                        <a class="btn btn-outline-info" asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
-                            <i class="bi bi-pencil-square"></i> &nbsp; Edit
-                        </a>
 
-                        <a class="btn btn-outline-secondary" asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
-                            <i class="bi bi-trash3"></i>
-                        </a>
-                    <div />
+                <th>
+                    Last Edited
+                </th>
+
+                <th>
+
                 </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(j => j.Resolved == false))
+            {
+                <tr>
+                    <th>
+                        <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
+                    <th />
+                    <th>
+                        @Html.DisplayFor(modelItem => item.User)
+                    </th>
 
-    </tbody>
-</table>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Priority)
+                    </th>
 
+                    <th>
+                        @Html.DisplayFor(modelItem => item.TimeCreated)
+                    </th>
+                    <th>
+                        <div class="btn-group shadow">
+                            <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                                <i class="bi bi-pencil-square"></i> &nbsp; Edit
+                            </a>
 
-<div class="container p-3">
+                            <a class="btn btn-outline-secondary " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                            <div />
+                    </th>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div class="container p-2 mt-5">
     <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-uppercase">
                 Closed Issues
             </h2>
         </div>
-        <div class="col-6">
-
-        </div>
     </div>
 
 </div>
 <br />
-<table class="table table-hover">
-    <thead>
-        <tr class="table-active">
-            <th>
-                @Html.DisplayNameFor(model => model.NoteTitle)
-            </th>
-
-            <th>
-
-            </th>
-            <th>
-                Created By
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Priority)
-            </th>
-
-            <th>
-                Last Edited
-            </th>
-            <th>
-
-            </th>
-
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Where(j => j.Resolved == true))
-        {
-            <tr>
+<div class=" container border shadow-lg pt-2 mt-2">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-secondary">
                 <th>
-                    <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
-                <th />
-
-                <th>
-                    @Html.DisplayFor(modelItem => item.User)
+                    @Html.DisplayNameFor(model => model.NoteTitle)
                 </th>
 
                 <th>
-                    @Html.DisplayFor(modelItem => item.Priority)
+
+                </th>
+                <th>
+                    Created By
                 </th>
 
                 <th>
-                    @Html.DisplayFor(modelItem => item.TimeCreated)
+                    @Html.DisplayNameFor(model => model.Priority)
+                </th>
+
+                <th>
+                    Last Edited
                 </th>
                 <th>
-                    <div class="btn-group">
-                        <a class="btn btn-outline-info" asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
-                            <i class="bi bi-pencil-square"></i> &nbsp; Edit
-                        </a>
 
-                        <a class="btn btn-outline-secondary" asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
-                            <i class="bi bi-trash3"></i>
-                        </a>
-                        <div />
                 </th>
+
+
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(j => j.Resolved == true))
+            {
+                <tr>
+                    <th>
+                        <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
+                    <th />
+
+                    <th>
+                        @Html.DisplayFor(modelItem => item.User)
+                    </th>
+
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Priority)
+                    </th>
+
+                    <th>
+                        @Html.DisplayFor(modelItem => item.TimeCreated)
+                    </th>
+                    <th>
+                        <div class="btn-group shadow">
+                            <a class="btn btn-outline-info" asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                                <i class="bi bi-pencil-square"></i> &nbsp; Edit
+                            </a>
+
+                            <a class="btn btn-outline-secondary" asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                            <div />
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

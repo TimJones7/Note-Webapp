@@ -4,30 +4,39 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to end the existence of this note for all eternity???</h3>
-<div>
-    <h4>Note</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoteTitle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NoteTitle)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoteBody)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NoteBody)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Terminate!!!" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="container shadow-lg mt-5 p-5 col-6">
+    <div class="border p-5">
+        <div class="row pt-2">
+            <h2>DELETE ISSUE</h2>
+        </div>
+        <br />
+        <div class="row pt-2">
+            <h3>Are you sure you want to delete Issue?</h3>
+        </div>
+        <br />
+        <dl class="row pt-2">
+            <dt class="col-sm-2">
+                Subject
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NoteTitle)
+            </dd>
+            <dt>
+                <br />
+            </dt>
+            <dt class="col-sm-2">
+                Issue
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NoteBody)
+            </dd>
+        </dl>
+        <br/>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Permanently Delete Issue" class="btn btn-danger" />
+            <button class="btn btn-outline-info" asp-action="Index">Back To List</button>
+        </form>
+    </div>
 </div>

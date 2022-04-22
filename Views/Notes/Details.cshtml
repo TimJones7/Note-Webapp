@@ -4,33 +4,49 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Note</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NoteTitle)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NoteTitle)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NoteBody)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NoteBody)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container shadow-lg mt-5 p-5 col-6">
+    <div class="border p-5">
+        <h4>Issue</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NoteTitle)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NoteTitle)
+            </dd>
+            <dt>
+                <br />
+            </dt>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NoteBody)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NoteBody)
+            </dd>
+            <dt>
+                <br />
+            </dt>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User)
+            </dd>
+        </dl>
+        <br />
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id">
+                <button class="btn btn-outline-info ">
+                    Edit Issue
+                </button>
+           </a>
+            <a asp-action="Index">
+                <button class="btn btn-primary">
+                    Back to List
+                </button>
+            </a>
+        </div>
+    </div>
 </div>
