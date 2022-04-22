@@ -32,11 +32,7 @@ namespace MyFirstWebApp.Controllers
             return View();
         }
 
-        // GET: Alt_View
-        public async Task<IActionResult> Alt_View()
-        {
-            return View();
-        }
+       
 
 
         // GET: Notes/ShowSearchResults
@@ -76,7 +72,7 @@ namespace MyFirstWebApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NoteTitle,NoteBody,User,Priority,Resolved,Category")] Note note)
+        public async Task<IActionResult> Create([Bind("Id,NoteTitle,NoteBody,User,Priority,Resolved")] Note note)
         {
             if(note.NoteTitle == note.NoteBody)
             {

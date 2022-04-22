@@ -5,158 +5,73 @@
 }
 
 
-<div class="container p-2 mt-5">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-uppercase">
-                Open Issues
-            </h2>
+
+<div class="container shadow-lg p-5 mt-5 col-8">
+    <div class="container p-1 mt-1">
+        <div class="row p-2">
+            <div class="col-6 text-center">
+                <h2 class="text-uppercase">
+                    Open Issues
+                </h2>
+            </div>
+            <div class="col-6 text-center">
+                <a asp-controller="Notes" asp-action="Create" class="btn btn-success shadow-lg" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create A New Note">
+                    <i class="bi bi-plus-lg"></i> &nbsp; Add
+                </a>
+            </div>
         </div>
-        <div class="col-6 text-end">
-            <a asp-controller="Notes" asp-action="Create" class="btn btn-success shadow-lg" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create A New Note">
-                <i class="bi bi-plus-lg"></i> &nbsp; Add
-            </a>
-        </div>
+    </div>
+    <div class="row p-2 m-2 justify-content-between">
+        @foreach (var item in Model.Where(j => j.Resolved == false))
+        {
+            <div class="card flex p-1 m-2 shadow rounded  bg-light" style="min-width: 10rem; max-width: 20rem;">
+                <div class="card-body">
+                    <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.NoteTitle)</h5>
+                    </a>
+                    <h6 class="card-subtitle mb-2 text-muted">Created by:  @Html.DisplayFor(modelItem => item.User)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Last Edited:  @Html.DisplayFor(modelItem => item.TimeCreated)</h6>
+                    <div class="p-1  text-center">
+                        <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                            <i class="bi bi-pencil-square"></i> &nbsp; Edit
+                        </a>
+
+                        <a class="btn btn-outline-secondary " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
 
-<br />
-<div class="container border shadow-lg pt-2 mt-2">
-    <table class="table table-hover">
-        <thead>
-            <tr class="table-secondary">
-                <th>
-                    @Html.DisplayNameFor(model => model.NoteTitle)
-                </th>
 
-                <th>
-
-                </th>
-                <th>
-                    Created By
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Priority)
-                </th>
-
-                <th>
-                    Last Edited
-                </th>
-
-                <th>
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Where(j => j.Resolved == false))
-            {
-                <tr>
-                    <th>
-                        <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
-                    <th />
-                    <th>
-                        @Html.DisplayFor(modelItem => item.User)
-                    </th>
-
-                    <th>
-                        @Html.DisplayFor(modelItem => item.Priority)
-                    </th>
-
-                    <th>
-                        @Html.DisplayFor(modelItem => item.TimeCreated)
-                    </th>
-                    <th>
-                        <div class="btn-group shadow">
-                            <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
-                                <i class="bi bi-pencil-square"></i> &nbsp; Edit
-                            </a>
-
-                            <a class="btn btn-outline-secondary " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                            <div />
-                    </th>
-                </tr>
-            }
-
-        </tbody>
-    </table>
-</div>
-
-<div class="container p-2 mt-5">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-uppercase">
-                Closed Issues
-            </h2>
-        </div>
+<div class="container shadow-lg p-5 mt-5 col-8">
+    <div class="row p-2 m-1 text-center">
+        <h1>Closed Issues</h1>
     </div>
+    <div class="row p-2 m-2 justify-content-around">
+        @foreach (var item in Model.Where(j => j.Resolved == true))
+        {
+            <div class="card flex p-2 m-2 shadow rounded  bg-light" style="min-width: 10rem; max-width: 20rem;">
+                <div class="card-body">
+                    <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.NoteTitle)</h5>
+                    </a>
+                    <h6 class="card-subtitle mb-2 text-muted">Created by:  @Html.DisplayFor(modelItem => item.User)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Last Edited:  @Html.DisplayFor(modelItem => item.TimeCreated)</h6>
+                    <div class="p-1  text-center">
+                        <a class="btn btn-outline-info m-1" asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                            <i class="bi bi-pencil-square"></i> &nbsp; Edit
+                        </a>
 
-</div>
-<br />
-<div class=" container border shadow-lg pt-2 mt-2">
-    <table class="table table-hover">
-        <thead>
-            <tr class="table-secondary">
-                <th>
-                    @Html.DisplayNameFor(model => model.NoteTitle)
-                </th>
-
-                <th>
-
-                </th>
-                <th>
-                    Created By
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Priority)
-                </th>
-
-                <th>
-                    Last Edited
-                </th>
-                <th>
-
-                </th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Where(j => j.Resolved == true))
-            {
-                <tr>
-                    <th>
-                        <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
-                    <th />
-
-                    <th>
-                        @Html.DisplayFor(modelItem => item.User)
-                    </th>
-
-                    <th>
-                        @Html.DisplayFor(modelItem => item.Priority)
-                    </th>
-
-                    <th>
-                        @Html.DisplayFor(modelItem => item.TimeCreated)
-                    </th>
-                    <th>
-                        <div class="btn-group shadow">
-                            <a class="btn btn-outline-info" asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
-                                <i class="bi bi-pencil-square"></i> &nbsp; Edit
-                            </a>
-
-                            <a class="btn btn-outline-secondary" asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                            <div />
-                    </th>
-                </tr>
-            }
-        </tbody>
-    </table>
+                        <a class="btn btn-outline-secondary m-1" asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
