@@ -33,12 +33,29 @@ namespace MyFirstWebApp
         // SQL database and to use ApplicationDbContext 
         public void ConfigureServices(IServiceCollection services)
         {
+            //  This is how the program connects 
+            //  to the proper database
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            
+            //  Adds a set of common identity services
+            //  to the application, including a default UI,
+            //  token providers, and configures
+            //  authentication to use identity cookies.
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            
+            //  this is how we tell the .net
+            //  framework that we have an MVC
+            //  style going on, with models, 
+            //  controllers and views.
             services.AddControllersWithViews();
+            
+            //  this is how we can use razor pages
+            //  which are html and C# combined
+            //  Runtime comp allows us to refresh 
+            //  app page and see changes during dev
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
