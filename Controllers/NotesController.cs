@@ -59,6 +59,40 @@ namespace MyFirstWebApp.Controllers
             return View(note);
         }
 
+        
+        [HttpGet]
+        public async Task<IActionResult> DetailsPartial(int id)
+        {
+            var note = _context.Note.Where(m => m.Id == id).FirstOrDefault();
+            return PartialView("DetailsPartial", note);
+        }
+
+
+
+        //  Get: Note/AddOrEdit
+        //  Get: Note/AddOrEdit/5
+        public  async Task<IActionResult>  AddOrEdit(int id = 0)
+        {
+            if (id == 0)
+                return View();
+            else
+            {
+                var note = await _context.Note.FindAsync(id);
+                if(note  == null)
+                {
+                    return NotFound();
+                }
+                return View(note);
+            }
+        }
+
+
+
+
+
+
+
+
         // GET: Notes/Create
         [Authorize]
         public IActionResult Create()

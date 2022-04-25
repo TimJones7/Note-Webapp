@@ -1,0 +1,24 @@
+﻿@model MyFirstWebApp.Models.Note
+
+
+<div class="modal fade" id="viewDetails">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="viewDetailsLabel">@Html.DisplayFor(model => model.NoteTitle)</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>x</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>Created By: @Html.DisplayFor(model => model.User)</h6>
+                <br />
+                <p>@Html.DisplayFor(model => model.NoteBody)</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
