@@ -1,24 +1,25 @@
-﻿@model MyFirstWebApp.Models.Note
-
-
-<div class="modal fade" id="viewDetails">
+﻿
+<!-- Button trigger modal -->
+<div class="container p-2 mt-5">
+    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="viewDetailsLabel">@Html.DisplayFor(model => model.NoteTitle)</h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>x</span>
-                </button>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h6>Created By: @Html.DisplayFor(model => model.User)</h6>
-                <br />
-                <p>@Html.DisplayFor(model => model.NoteBody)</p>
+                ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-
