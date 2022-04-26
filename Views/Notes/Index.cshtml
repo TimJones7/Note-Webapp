@@ -4,31 +4,41 @@
 }
 
 
-<br/>
-<div class="container col-12 shadow-lg">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-                <h2 class="text-uppercase">
-                    <i class="bi bi-folder2-open"></i> Open Issues
-                </h2>
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
-                <h2>
-                    <i class="bi bi-check2-square"></i> Closed Issues
-                </h2>
-            </button>
-        </li>
-    </ul>
+<div class="container col-12 border mt-4 rounded ">
+
+    <!-- TAB BUTTONS -->
+    <div class="container row p-1 m-1">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                    <h2 class="text-uppercase">
+                        <i class="bi bi-folder2-open"></i> Open Issues
+                    </h2>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                    <h2>
+                        <i class="bi bi-check2-square"></i> Closed Issues
+                    </h2>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- CONTENT DIVS THAT BECOME VISABLE UPON TAB CLICK -->
     <div class="tab-content" id="myTabContent">
+
+        <!-- OPEN ISSUES TABLE -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div>
-                <div class="container border shadow-lg pt-2 mt-2">
-                    <table class="table table-hover">
+                <div class="container  border rounded  pt-2 mt-2 ">
+                    <table class="table table-hover ">
+
+                        <!-- TABLE COLUMN TITLES -->
                         <thead>
-                            <tr class="table-secondary">
+                            <tr class="table-bordered">
                                 <th>
                                     @Html.DisplayNameFor(model => model.NoteTitle)
                                 </th>
@@ -49,20 +59,20 @@
                                 </th>
 
                                 <th>
-                                    <a asp-controller="Notes" asp-action="Create" class="btn btn-success shadow-lg" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create A New Note">
-                                        <i class="bi bi-plus-lg"></i> &nbsp; Add
-                                    </a>
+                                    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#create-modal">
+                                        <i class="bi bi-plus-lg"></i> &nbsp; Add Issue
+                                    </button>
                                 </th>
                             </tr>
                         </thead>
-                        
+
                         <tbody>
-                            
+
                             @foreach (var item in Model.Where(j => j.Resolved == false))
                             {
                                 <tr>
                                     <th>
-                                        <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
+                                        <a class="text-primary" data-bs-toggle="modal" data-bs-target="#details-modal-@item.Id" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
                                     <th />
                                     <th>
                                         @Html.DisplayFor(modelItem => item.User)
@@ -76,32 +86,73 @@
                                         @Html.DisplayFor(modelItem => item.TimeCreated)
                                     </th>
                                     <th>
-                                        <div class="btn-group shadow">
+                                        <div>
                                             <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
                                                 <i class="bi bi-pencil-square"></i> &nbsp; Edit
                                             </a>
 
-                                            <a class="btn btn-outline-secondary " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                                            <a class="btn btn-outline-danger " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
                                                 <i class="bi bi-trash3"></i>
                                             </a>
                                             <div />
                                     </th>
                                 </tr>
+
+                                <!-- DETAILS MODALS FOR FOR LOOP -->
+                                <div class="modal fade" id="details-modal-@item.Id" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="exampleModalLabel">
+                                                    @Html.DisplayFor(model => item.NoteTitle)
+                                                </h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container p-2 m-2">
+                                                    <p>
+                                                        @Html.DisplayFor(model => item.NoteBody)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="container p-1 m-1">
+                                                    <div class="row">
+                                                        Created By:  @Html.DisplayFor(modelItem => item.User)
+                                                    </div>
+                                                    <div class="row">
+                                                        Last Edited On:  @Html.DisplayFor(modelItem => item.TimeCreated)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
                             }
                         </tbody>
                     </table>
-                   
+
                 </div>
-                <br/>
+                <br />
             </div>
         </div>
+
+        <!-- CLOSED ISSUES TABLE -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div>
-               
-                <div class="container border shadow-lg pt-2 mt-2">
+
+                <div class="container border rounded  pt-2 mt-2">
                     <table class="table table-hover">
                         <thead>
-                            <tr class="table-secondary">
+                            <tr class="table-bordered ">
                                 <th>
                                     @Html.DisplayNameFor(model => model.NoteTitle)
                                 </th>
@@ -131,7 +182,7 @@
                             {
                                 <tr>
                                     <th>
-                                        <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
+                                        <button data-bs-toggle="modal" data-bs-target="#details-modal-@item.Id" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</button>
                                     <th />
                                     <th>
                                         @Html.DisplayFor(modelItem => item.User)
@@ -145,24 +196,150 @@
                                         @Html.DisplayFor(modelItem => item.TimeCreated)
                                     </th>
                                     <th>
-                                        <div class="btn-group shadow">
+                                        <div>
                                             <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
                                                 <i class="bi bi-pencil-square"></i> &nbsp; Edit
                                             </a>
 
-                                            <a class="btn btn-outline-secondary " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                                            <a class="btn btn-outline-danger " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
                                                 <i class="bi bi-trash3"></i>
                                             </a>
                                             <div />
                                     </th>
                                 </tr>
+
+                                <!-- DETAILS MODALS FOR FOR LOOP -->
+                                <div class="modal fade" id="details-modal-@item.Id" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="exampleModalLabel">
+                                                    @Html.DisplayFor(model => item.NoteTitle)
+                                                </h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    @Html.DisplayFor(model => item.NoteBody)
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                             }
 
                         </tbody>
                     </table>
                 </div>
-                <br/>
+                <br />
             </div>
         </div>
     </div>
 </div>
+
+
+
+<!-- ADD ISSUE MODAL -->
+<div class="modal fade" id="create-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <h2 class="text-uppercase">
+                        Create a New Issue!
+                    </h2>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container border m-1 p-1">
+                    <div class=" p-2">
+
+
+                        <div class="row">
+
+                            <form asp-action="Create" method="post">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="">
+                                    <div class="form-group">
+                                        <label class="control-label">Subject</label>
+                                        <input name="NoteTitle" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="form-group">
+                                        <label class="form-label mt-4">Explain Issue</label>
+                                        <textarea name="NoteBody" class="form-control" rows="5" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <div class="form-group">
+                                        <label class="control-label"></label>
+                                        <select name="Priority" class="form-control" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
+                                            <option>Select Priority Level</option>
+                                        </select>
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <input type="hidden" value="@User.Identity.Name" name="User" />
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- CREATE A DELETE MODAL -->
+<!-- Button trigger modal -->
+<div class="container p-2 mt-5">
+    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+    <div>
+        <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <span>
+                Testing Modal Button
+            </span>
+        </a>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
