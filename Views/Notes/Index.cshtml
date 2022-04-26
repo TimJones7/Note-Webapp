@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<MyFirstWebApp.Models.Note>
-
 @{
     ViewData["Title"] = "Index";
 }
+
 
 <partial name="DetailsPartial" />
 
@@ -26,14 +26,17 @@
         {
             <div class="card flex p-1 m-2 shadow rounded " style="min-width: 10rem; max-width: 20rem;">
                 <div class="card-body">
-                    <a data-toggle="ajax-modal" asp-action="DetailsPartial" asp-route-id="@item.Id" title="@item.NoteBody">
+                    <a data-toggle="ajax-modal" asp-action="Details" asp-route-id="@item.Id" title="@item.NoteBody">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.NoteTitle)</h5>
                     </a>
                     <h6 class="card-subtitle mb-2 text-muted">Created by:  @Html.DisplayFor(modelItem => item.User)</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Last Edited:  @Html.DisplayFor(modelItem => item.TimeCreated)</h6>
                     <div class="p-1  text-center">
 
-                        <button type="button" class="btn btn-outline-info" data-toggle="ajax-modal" asp-controller="Notes" asp-action="DetailsPartial" asp-route-id="@item.Id">Expand</button>
+
+                        <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Expand Details">
+                            Expand
+                        </a>
 
                         <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
                             <i class="bi bi-pencil-square"></i> &nbsp; Edit
@@ -85,5 +88,10 @@
         }
     </div>
 </div>
-
+<script type="text/javascript" src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+    });
+</script>
 
