@@ -87,11 +87,11 @@
                                     </th>
                                     <th>
                                         <div>
-                                            <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                                            <a class="btn btn-outline-info "  data-bs-toggle="modal" data-bs-target="#edit-@item.Id" title="Edit Issue">
                                                 <i class="bi bi-pencil-square"></i> &nbsp; Edit
                                             </a>
 
-                                            <a class="btn btn-outline-danger " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                                            <a class="btn btn-outline-danger " data-bs-toggle="modal" data-bs-target="#delete-@item.Id" name="@item.Id" title="DELETE ISSUE!">
                                                 <i class="bi bi-trash3"></i>
                                             </a>
                                             <div />
@@ -133,8 +133,92 @@
                                 </div>
 
 
+                                <!-- DELETE ISSUE MODAL -->
+                                <div class="modal" id="delete-@item.Id" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete?</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container align-content-center ">
+                                                    <form asp-action="Delete" method="post">
+                                                        <input type="hidden" value="@item.Id" name="id" />
+                                                        <input type="submit" value="Permanently Delete Issue" class="btn btn-danger" />
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
 
 
+                                <!-- EDIT ISSUE MODAL -->
+                                <div class="modal fade" id="edit-@item.Id" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                    Edit Issue
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <form asp-action="Edit">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <input type="hidden" name="User" value="@User.Identity.Name" />
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label name="NoteTitle" class="control-label">Issue Title</label>
+                                                            <input name="NoteTitle" class="form-control" value="@item.NoteTitle"  required>
+                                                               
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label name="NoteBody" class="control-label">Issue Explained</label>
+                                                            <textarea name="NoteBody" class="form-control" rows="5" required>
+                                                                    @item.NoteBody 
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class=" col-4">
+                                                        <div class="form-group">
+                                                            <label name="Priority" class="control-label">Select Priority Level</label>
+                                                            <select name="Priority" class="form-control" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
+                                                                <option value="@item.Priority" selected>Select Priority Level</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="form-check form-switch">
+                                                        <label name="Resolved" class="form-check-label">Resolved?</label>
+                                                        <input type="checkbox" name="Resolved" class="form-check-input" value="true"/>
+                                                        <span name="Resolved" class="text-danger"></span>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row pt-2">
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             }
                         </tbody>
@@ -148,9 +232,10 @@
         <!-- CLOSED ISSUES TABLE -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div>
-
                 <div class="container border rounded  pt-2 mt-2">
                     <table class="table table-hover">
+
+                        <!-- TABLE COLUMN TITLES -->
                         <thead>
                             <tr class="table-bordered ">
                                 <th>
@@ -182,7 +267,7 @@
                             {
                                 <tr>
                                     <th>
-                                        <button data-bs-toggle="modal" data-bs-target="#details-modal-@item.Id" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</button>
+                                        <a class="text-primary" data-bs-toggle="modal" data-bs-target="#details-modal-@item.Id" title="@item.NoteBody">@Html.DisplayFor(modelItem => item.NoteTitle)</a>
                                     <th />
                                     <th>
                                         @Html.DisplayFor(modelItem => item.User)
@@ -201,7 +286,7 @@
                                                 <i class="bi bi-pencil-square"></i> &nbsp; Edit
                                             </a>
 
-                                            <a class="btn btn-outline-danger " asp-controller="Notes" asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="DELETE ISSUE!">
+                                            <a class="btn btn-outline-danger " data-bs-toggle="modal" data-bs-target="#delete-@item.Id" name="@item.Id" title="DELETE ISSUE!">
                                                 <i class="bi bi-trash3"></i>
                                             </a>
                                             <div />
@@ -231,7 +316,27 @@
                                     </div>
                                 </div>
 
+                                <!-- DELETE ISSUE MODAL -->
+                                <div class="modal" id="delete-@item.Id" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete?</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container align-content-center ">
+                                                    <form asp-action="Delete" method="post">
+                                                        <input type="hidden" value="@item.Id" name="id" />
+                                                        <input type="submit" value="Permanently Delete Issue" class="btn btn-danger" />
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                </div>
 
                             }
 
@@ -307,39 +412,5 @@
     </div>
 </div>
 
-
-
-<!-- CREATE A DELETE MODAL -->
-<!-- Button trigger modal -->
-<div class="container p-2 mt-5">
-    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
-    <div>
-        <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <span>
-                Testing Modal Button
-            </span>
-        </a>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
