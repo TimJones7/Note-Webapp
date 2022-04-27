@@ -28,13 +28,10 @@
                         <div class="collapse navbar-collapse" id="navbarColor01">
                             <ul class="navbar-nav me-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Notes" asp-action="Index" title="Issues">Issues</a>
+                                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#about-modal" title="About"><i class="bi bi-fingerprint"></i></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Home" asp-action="About" title="About"><i class="bi bi-fingerprint"></i></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Home" asp-action="FAQ" title="FAQ"><i class="bi bi-question-square"></i></a>
+                                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#faq-modal" title="FAQ"><i class="bi bi-question-square"></i></a>
                                 </li>
                                 <partial name="_Logout" />
                             </ul>
@@ -62,11 +59,64 @@
 
     </div>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
+
+
+
+
+
+    <!-- ABOUT MODAL -->
+    <div class="modal fade" id="about-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <h2 class="text-uppercase">
+                            About ProJect Manager
+                        </h2>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container border m-1 p-1">
+                        <p>This will be an about section</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ MODAL -->
+    <div class="modal fade" id="faq-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <h2 class="text-uppercase">
+                            Frequently Asked Questions
+                        </h2>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container border m-1 p-1">
+                        <p>This will be a section about frequently asked questions</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

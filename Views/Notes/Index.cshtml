@@ -7,24 +7,39 @@
 <div class="container col-12 border mt-4 rounded ">
 
     <!-- TAB BUTTONS -->
-    <div class="container row p-1 m-1">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-                    <h2 class="text-uppercase">
-                        <i class="bi bi-folder2-open"></i> Open Issues
-                    </h2>
-                </button>
-            </li>
+    <div class="container  p-1 m-1">
+        <div class="container row col-12">
+            <div class="col-lg-6">
+                <ul class="nav nav-tabs " id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                            <h2 class="text-uppercase">
+                                <i class="bi bi-folder2-open"></i> Open Issues
+                            </h2>
+                        </button>
+                    </li>
 
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
-                    <h2>
-                        <i class="bi bi-check2-square"></i> Closed Issues
-                    </h2>
-                </button>
-            </li>
-        </ul>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                            <h2>
+                                <i class="bi bi-check2-square"></i> Closed Issues
+                            </h2>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-6 text-end ">
+                
+                    <button type="button" class="btn btn-primary  text-right" data-bs-toggle="modal" data-bs-target="#create-modal">
+                        <i class="bi bi-plus-lg"></i> &nbsp; Add Issue
+                    </button>
+                
+            </div>
+            
+
+        </div>
+
     </div>
 
     <!-- CONTENT DIVS THAT BECOME VISABLE UPON TAB CLICK -->
@@ -59,9 +74,7 @@
                                 </th>
 
                                 <th>
-                                    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#create-modal">
-                                        <i class="bi bi-plus-lg"></i> &nbsp; Add Issue
-                                    </button>
+                                    
                                 </th>
                             </tr>
                         </thead>
@@ -87,7 +100,7 @@
                                     </th>
                                     <th>
                                         <div>
-                                            <a class="btn btn-outline-info "  data-bs-toggle="modal" data-bs-target="#edit-@item.Id" title="Edit Issue">
+                                            <a class="btn btn-outline-info " data-bs-toggle="modal" data-bs-target="#edit-@item.Id" title="Edit Issue">
                                                 <i class="bi bi-pencil-square"></i> &nbsp; Edit
                                             </a>
 
@@ -150,7 +163,7 @@
                                                         <input type="hidden" value="@item.Id" name="id" />
                                                         <input type="submit" value="Permanently Delete Issue" class="btn btn-danger" />
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        
+
                                                     </form>
                                                 </div>
                                             </div>
@@ -179,8 +192,8 @@
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label name="NoteTitle" class="control-label">Issue Title</label>
-                                                            <input name="NoteTitle" class="form-control" value="@item.NoteTitle"  required>
-                                                               
+                                                            <input name="NoteTitle" class="form-control" value="@item.NoteTitle" required>
+
                                                             </input>
                                                         </div>
                                                     </div>
@@ -203,7 +216,7 @@
                                                     <br />
                                                     <div class="form-check form-switch">
                                                         <label name="Resolved" class="form-check-label">Resolved?</label>
-                                                        <input type="checkbox" name="Resolved" class="form-check-input" value="true"/>
+                                                        <input type="checkbox" name="Resolved" class="form-check-input" value="true" />
                                                         <span name="Resolved" class="text-danger"></span>
                                                     </div>
                                                     <br />
@@ -284,7 +297,7 @@
                                     </th>
                                     <th>
                                         <div>
-                                            <a class="btn btn-outline-info " asp-controller="Notes" asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Issue">
+                                            <a class="btn btn-outline-info " data-bs-toggle="modal" data-bs-target="#edit-@item.Id" title="Edit Issue">
                                                 <i class="bi bi-pencil-square"></i> &nbsp; Edit
                                             </a>
 
@@ -340,8 +353,64 @@
                                     </div>
                                 </div>
 
-                            }
 
+                                <!-- EDIT ISSUE MODAL -->
+                                <div class="modal fade" id="edit-@item.Id" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                    Edit Issue
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form asp-action="Edit">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <input type="hidden" name="Id" value="@item.Id" />
+                                                    <input type="hidden" name="User" value="@User.Identity.Name" />
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label name="NoteTitle" class="control-label">Issue Title</label>
+                                                            <input name="NoteTitle" class="form-control" value="@item.NoteTitle" required>
+                                                            </input>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label name="NoteBody" class="control-label">Issue Explained</label>
+                                                            <textarea name="NoteBody" class="form-control" rows="5" required>@item.NoteBody</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class=" col-4">
+                                                        <div class="form-group">
+                                                            <label name="Priority" class="control-label">Select Priority Level</label>
+                                                            <select name="Priority" class="form-control" asp-items="Html.GetEnumSelectList<PriorityLevel>()">
+                                                                <option value="@item.Priority" selected>Select Priority Level</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="form-check form-switch">
+                                                        <label name="Resolved" class="form-check-label">Resolved?</label>
+                                                        <input type="checkbox" name="Resolved" class="form-check-input" value="true" />
+                                                        <span name="Resolved" class="text-danger"></span>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row pt-2">
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </tbody>
                     </table>
                 </div>
