@@ -126,6 +126,9 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
+                                                <a class="btn btn-outline-info " data-bs-toggle="modal" data-bs-target="#edit-@item.Id" title="Edit Issue">
+                                                    <i class="bi bi-pencil-square"></i> &nbsp; Edit
+                                                </a>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>
@@ -134,7 +137,7 @@
 
 
                                 <!-- DELETE ISSUE MODAL -->
-                                <div class="modal" id="delete-@item.Id" tabindex="-1" aria-hidden="true">
+                                <div class="modal fade" id="delete-@item.Id" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -147,6 +150,7 @@
                                                         <input type="hidden" value="@item.Id" name="id" />
                                                         <input type="submit" value="Permanently Delete Issue" class="btn btn-danger" />
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        
                                                     </form>
                                                 </div>
                                             </div>
@@ -184,9 +188,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label name="NoteBody" class="control-label">Issue Explained</label>
-                                                            <textarea name="NoteBody" class="form-control" rows="5" required>
-                                                                    @item.NoteBody 
-                                                            </textarea>
+                                                            <textarea name="NoteBody" class="form-control" rows="5" required>@item.NoteBody</textarea>
                                                         </div>
                                                     </div>
                                                     <br />
