@@ -21,10 +21,12 @@ namespace MyFirstWebApp.Controllers
         }
 
         // GET: Notes
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Note.ToListAsync());
         }
+
 
         // GET: Notes/ShowSearchForm
         public async Task<IActionResult> ShowSearchForm()
